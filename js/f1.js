@@ -106,7 +106,6 @@ console.log('This is f1.js')
             trHead.append(thNational)
             trHead.append(thConstructor)
             let display = document.getElementById('standingTable');
-            display.innerHTML = '';
             display.append(table)
 
     }
