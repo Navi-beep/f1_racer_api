@@ -35,18 +35,17 @@ console.log('This is f1.js')
 
 
             let thead = document.createElement('thead');
-    
             let trHead = document.createElement('tr');
 
             
             let thPoints = document.createElement('th');
-            thPoints.scope = 'col'
-            thPoints.innerHTML = 'total points'
+            thPoints.scope = 'column'
+            thPoints.innerHTML = 'total points:'
             
             
             let thPosit = document.createElement('th');
-            thPosit.scope = 'col'
-            thPosit.innerHTML = 'Driver Position'
+            thPosit.scope = 'column'
+            thPosit.innerHTML = 'Driver Position:'
 
             
             let thdriver = document.createElement('th');
@@ -56,12 +55,12 @@ console.log('This is f1.js')
 
             let thNational = document.createElement('th');
             thNational.scope = 'column'
-            thNational.innerHTML = 'Driver Nationality'
+            thNational.innerHTML = 'Driver Nationality:'
             
 
             let thConstructor = document.createElement('th')
             thConstructor.scope = 'column'
-            thConstructor.innerHTML = 'Constructor'
+            thConstructor.innerHTML = 'Constructor:'
             
 
             let tableBody = document.createElement('tbody')
@@ -106,8 +105,6 @@ console.log('This is f1.js')
             trHead.append(thdriver)
             trHead.append(thNational)
             trHead.append(thConstructor)
-            
-
             let display = document.getElementById('standingTable');
             display.innerHTML = '';
             display.append(table)
