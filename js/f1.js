@@ -13,8 +13,8 @@ console.log('This is f1.js')
             let inputRound = event.target.round.value;
             
             let f1Data = await getSeasonInfo(inputSeason, inputRound)
-            console.log('Please wait, retreiving data', f1Data);
-            buildf1Table(f1Data)
+            console.log(f1Data);
+            buildf1Table(f1Data);
             
         }
 
@@ -38,9 +38,9 @@ console.log('This is f1.js')
             let trHead = document.createElement('tr');
 
             
-            let thPoints = document.createElement('th');
-            thPoints.scope = 'column'
-            thPoints.innerHTML = 'total points:'
+            let thtotalPoints = document.createElement('th');
+            thtotalPoints.scope = 'column'
+            thtotalPoints.innerHTML = 'total points:'
             
             
             let thPosit = document.createElement('th');
@@ -71,9 +71,9 @@ console.log('This is f1.js')
                 let tableRow = document.createElement('tr');
                 
         
-                let tdPoint = document.createElement('td')
-                tdPoint.scope = 'row'
-                tdPoint.innerHTML = racers[racer]['points']
+                let tdtotalPoint = document.createElement('td')
+                tdtotalPoint.scope = 'row'
+                tdtotalPoint.innerHTML = racers[racer]['points']
 
                 let tdPosit = document.createElement('td')
                 tdPosit.scope = 'row'
@@ -90,7 +90,7 @@ console.log('This is f1.js')
 
 
                 tableRow.append(tdPosit);
-                tableRow.append(tdPoint);
+                tableRow.append(tdtotalPoint);
                 tableRow.append(tdDriver);
                 tableRow.append(tdNational);
                 tableRow.append(tdConstructor);
@@ -101,7 +101,7 @@ console.log('This is f1.js')
             table.append(tableBody)
             thead.append(trHead)
             trHead.append(thPosit)
-            trHead.append(thPoints)
+            trHead.append(thtotalPoints)
             trHead.append(thdriver)
             trHead.append(thNational)
             trHead.append(thConstructor)
