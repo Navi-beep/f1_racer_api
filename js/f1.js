@@ -6,20 +6,15 @@ console.log('This is f1.js')
         let form = document.getElementById('seasonForm');
         console.log(form);
 
-        async function handleSubmit(e){
-            console.log('Please wait...')
-            e.preventDefault()
+        async function handleSubmit(event){
+            event.preventDefault();
 
-
-            let inputSeason = e.target.inputSeason.value;
-            let inputRound = e.target.inputRound.value;
+            let inputSeason = event.target.season.value;
+            let inputRound = event.target.round.value;
             
-            let racersData = await getSeasonInfo(inputSeason, inputRound)
-            inputSeason.value = ''
-            inputRound.value = ''
-            console.log('Please wait, retreiving data', racersData);
-
-            buildf1Table(racersData)
+            let f1Data = await getSeasonInfo(inputSeason, inputRound)
+            console.log('Please wait, retreiving data', f1Data);
+            buildf1Table(f1Data)
             
         }
 
@@ -33,61 +28,60 @@ console.log('This is f1.js')
 //table should display: position, points,  driver name, driver nationality, and constructor name
 
 
-        function buildf1Table(racersData){
+        function buildf1Table(f1Data){
             console.log('creating table....');
             let table = document.createElement('table');
             table.className = 'table';
 
 
             let thead = document.createElement('thead');
-            
-
+    
             let trHead = document.createElement('tr');
-            
 
-            let thPosition = document.createElement('th');
-            thPosition.scope = 'col'
-            thPosition.innerHTML = 'Driver Position'
             
-
             let thPoints = document.createElement('th');
             thPoints.scope = 'col'
             thPoints.innerHTML = 'total points'
             
+            
+            let thPosit = document.createElement('th');
+            thPosit.scope = 'col'
+            thPosit.innerHTML = 'Driver Position'
 
-            let thdriverName = document.createElement('th');
-            thdriverName.scope = 'col'
-            thdriverName.innerHTML = 'Driver name:'
+            
+            let thdriver = document.createElement('th');
+            thdriver.scope = 'column'
+            thdriver.innerHTML = 'Driver name:'
             
 
             let thNational = document.createElement('th');
-            thNational.scope = 'col'
+            thNational.scope = 'column'
             thNational.innerHTML = 'Driver Nationality'
             
 
             let thConstructor = document.createElement('th')
-            thConstructor.scope = 'col'
+            thConstructor.scope = 'column'
             thConstructor.innerHTML = 'Constructor'
             
 
             let tableBody = document.createElement('tbody')
             ;
 
-            racers = racersData.StandingsLists[0].DriverStandings
+            racers = f1Data.StandingsLists[0].DriverStandings
             for (racer in racers){
                 let tableRow = document.createElement('tr');
                 
+        
+                let tdPoint = document.createElement('td')
+                tdPoint.scope = 'row'
+                tdPoint.innerHTML = racers[racer]['points']
 
                 let tdPosit = document.createElement('td')
                 tdPosit.scope = 'row'
                 tdPosit.innerHTML = racers[racer]['position']
 
-                let tdPoint = document.createElement('td')
-                tdPoint.scope = 'row'
-                tdPoint.innerHTML = racers[racer]['points']
-
-                let tdDriverName = document.createElement('td')
-                tdDriverName.innerHTML = `${racers[racer]['Driver']['givenName']} ${racers[racer]['Driver']['familyName']}`;
+                let tdDriver = document.createElement('td')
+                tdDriver.innerHTML = `${racers[racer]['Driver']['givenName']} ${racers[racer]['Driver']['familyName']}`;
 
                 let tdNational = document.createElement('td')
                 tdNational.innerHTML = racers[racer]['Driver']['nationality'];
@@ -98,27 +92,25 @@ console.log('This is f1.js')
 
                 tableRow.append(tdPosit);
                 tableRow.append(tdPoint);
-                tableRow.append(tdDriverName);
+                tableRow.append(tdDriver);
                 tableRow.append(tdNational);
                 tableRow.append(tdConstructor);
                 tableBody.append(tableRow);
         }
 
-            thead.append(trHead)
-            trHead.append(thPosition)
-            trHead.append(thPoints)
-            trHead.append(thdriverName)
-            trHead.append(thNational)
-            trHead.append(thConstructor)
             table.append(thead)
             table.append(tableBody)
-
+            thead.append(trHead)
+            trHead.append(thPosit)
+            trHead.append(thPoints)
+            trHead.append(thdriver)
+            trHead.append(thNational)
+            trHead.append(thConstructor)
+            
 
             let display = document.getElementById('standingTable');
             display.innerHTML = '';
             display.append(table)
-
-
 
     }
 
